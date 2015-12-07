@@ -417,6 +417,8 @@ Transmission.prototype =
 	{
 		var handled = false,
 		    rows = this._rows,
+		    o = ev.keyCode === 79, // o key pressed
+		    esc = ev.keyCode === 27, // esc key pressed
 		    up = ev.keyCode === 38, // up key pressed
 		    dn = ev.keyCode === 40, // down key pressed
 		    shift = ev.keyCode === 16; // shift key pressed
@@ -466,6 +468,15 @@ Transmission.prototype =
 		else if (shift)
 		{
 			this._shift_index = this.indexOfLastTorrent();
+		}
+		else if (o)
+		{
+			this.uploadTorrentFile();
+			handled = true;
+		}
+		else if (esc)
+		{
+			this.hideUploadDialog();
 		}
 
 		return !handled;
